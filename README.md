@@ -4,8 +4,8 @@ C++ template that doubles the integer class it is given, when nested this can cr
 
 
 
-This started as an amusing exercise is template meta-programming.. 
-Or in this case nestable classes. AKA std::list<std::list<>>
+This started as an amusing exercise in template meta-programming.. 
+Or in this case nestable classes. AKA std::list&<std::list<>&>
 But the optimizer can see into the nesting, so the generated assembly 
 actually looks really sort of native. Especially since the base class
 is just gcc inline assembly...
@@ -25,10 +25,10 @@ an x86 int128 class that can provide information about overflow/carry
 Its this class which is used as the basis for the integer doubler class.
 
 The amusing code is where we have:
-typedef class DoubleInt_t<int128>    int256;
-typedef class DoubleInt_t<int256>    int512;
-typedef class DoubleInt_t<int512>    int1024;
-typedef class DoubleInt_t<int1024>   int2048;
+ typedef class DoubleInt_t<int128>    int256;
+ typedef class DoubleInt_t<int256>    int512;
+ typedef class DoubleInt_t<int512>    int1024;
+ typedef class DoubleInt_t<int1024>   int2048;
  
 While these are called int256/etc they are actually unsigned 
 (because at the time, I thought that the default int class in C++ should be

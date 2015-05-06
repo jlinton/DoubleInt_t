@@ -2,7 +2,7 @@
 // AKA the integer doubler template.
 // Copyright(C) 2007,2015 Jeremy Linton
 //
-// This started as an amusing exercise is template meta-programming.. 
+// This started as an amusing exercise in template meta-programming.. 
 // Or in this case nestable classes. AKA std::list<std::list<>>
 // But the optimizer can see into the nesting, so the generated assembly 
 // actually looks really sort of native. Especially since the base class
