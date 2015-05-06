@@ -137,7 +137,7 @@ typedef class int128_t
         friend int128_t operator*(const int128_t &lhs,const int128_t &rhs) { int128_t tmp=lhs; Multiply128(&tmp,&rhs); return tmp;}
 */
 
-	    // input/output routines
+        // input/output routines
         string AsString(const char *format);
         char GetLowByte() {return Lo&0xFF;}
 //  protected:
@@ -361,9 +361,9 @@ typedef class SignedInt_t<int256>    sint256; //signed 256 bit int
 // for 64-bit x86
 unsigned long long rdtsc(void)
 {
-	unsigned int tickl, tickh;
-	__asm__ __volatile__("rdtsc":"=a"(tickl),"=d"(tickh));
-	return ((unsigned long long)tickh << 32)|tickl;
+    unsigned int tickl, tickh;
+    __asm__ __volatile__("rdtsc":"=a"(tickl),"=d"(tickh));
+    return ((unsigned long long)tickh << 32)|tickl;
 }
 
 // for 32-bit x86
@@ -1317,321 +1317,321 @@ void Test256BitTemplate(void)
     for (int x=0;x<10;x++)
     {
         printf("divide value=%s by=%s (remainder=%s)\n",t128.AsString("%X").c_str(),t2.AsString("%X").c_str(),remainder.AsString("%X").c_str());
-		remainder=DoubleInt_t<int128>::DivideDouble(&t128,t2);
-	}
+        remainder=DoubleInt_t<int128>::DivideDouble(&t128,t2);
+    }
 
-	// class shift test
-	test=0x1;
-	t128=test;
-	for (int x=0;x<200;x++)
-	{
-		printf("shift value=%s\n",t128.AsString("%X").c_str());
-		t128<<=1;
-	}
-	for (int x=0;x<200;x++)
-	{
-		printf("shift value=%s\n",t128.AsString("%X").c_str());
-		t128>>=1;
-	}
+    // class shift test
+    test=0x1;
+    t128=test;
+    for (int x=0;x<200;x++)
+    {
+        printf("shift value=%s\n",t128.AsString("%X").c_str());
+        t128<<=1;
+    }
+    for (int x=0;x<200;x++)
+    {
+        printf("shift value=%s\n",t128.AsString("%X").c_str());
+        t128>>=1;
+    }
 
 
-	test=0xF;
-	t128=test;
-	test=0x10;
-	t2=test;
-	test=0;
-	over=test;
-	int64 start,end;
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		over=DoubleInt_t<int128>::MultiplyDouble(&t128,t2);
-	}
-	rdtscll(end);
-	printf("MultiplyDouble Took %lld cycles a loop\n",(end-start)/6);
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		t128*=t2;
-	}
-	rdtscll(end);
-	printf("operator *= %d cycles a loop\n",(end-start)/6);
+    test=0xF;
+    t128=test;
+    test=0x10;
+    t2=test;
+    test=0;
+    over=test;
+    int64 start,end;
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        over=DoubleInt_t<int128>::MultiplyDouble(&t128,t2);
+    }
+    rdtscll(end);
+    printf("MultiplyDouble Took %lld cycles a loop\n",(end-start)/6);
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        t128*=t2;
+    }
+    rdtscll(end);
+    printf("operator *= %d cycles a loop\n",(end-start)/6);
 }
 
 void Test512BitTemplate(void)
 {
-	int256 test=1024*1024*1024;
-	int512 t128,t2, over;
+    int256 test=1024*1024*1024;
+    int512 t128,t2, over;
 
-	t128=test;
-	printf("Hello there 0x%s\n",t128.AsString("%X").c_str());
-	over=int512::MultiplyDouble(&t128,t128);
-	printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
-	over=int512::MultiplyDouble(&t128,t128);
-	printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
+    t128=test;
+    printf("Hello there 0x%s\n",t128.AsString("%X").c_str());
+    over=int512::MultiplyDouble(&t128,t128);
+    printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
+    over=int512::MultiplyDouble(&t128,t128);
+    printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
 
 
-	test=0xFFFFFFFFFFFFFFFF;
-	t128=test;
-	printf("Hello there 0x%s\n",t128.AsString("%X").c_str());
-	over=int512::MultiplyDouble(&t128,t128);
-	printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
-	over=int512::MultiplyDouble(&t128,t128);
-	printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
-	over=int512::MultiplyDouble(&t128,t128);
-	printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
+    test=0xFFFFFFFFFFFFFFFF;
+    t128=test;
+    printf("Hello there 0x%s\n",t128.AsString("%X").c_str());
+    over=int512::MultiplyDouble(&t128,t128);
+    printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
+    over=int512::MultiplyDouble(&t128,t128);
+    printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
+    over=int512::MultiplyDouble(&t128,t128);
+    printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
 
-	test=0xF;
-	t128=test;
-	test=0x10;
-	t2=test;
-	test=0;
-	over=test;
-	for (int x=0;x<128;x++)
-	{
-		printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
-		over=int512::MultiplyDouble(&t128,t2);
-		
-	}
+    test=0xF;
+    t128=test;
+    test=0x10;
+    t2=test;
+    test=0;
+    over=test;
+    for (int x=0;x<128;x++)
+    {
+        printf("Hello there 0x%s over=%s\n",t128.AsString("%X").c_str(),over.AsString("%X").c_str());
+        over=int512::MultiplyDouble(&t128,t2);
+        
+    }
 
     // shift left test
-	test=1;
-	t128=test;
-	int carryres=0;
-	for (int x=0;x<500;x++)
-	{
-		printf("shift value=%s carry=%d dec=%s\n",t128.AsString("%X").c_str(),carryres,t128.AsString("%d").c_str());
-		carryres=int512::shiftleft(&t128,0);
-	}
+    test=1;
+    t128=test;
+    int carryres=0;
+    for (int x=0;x<500;x++)
+    {
+        printf("shift value=%s carry=%d dec=%s\n",t128.AsString("%X").c_str(),carryres,t128.AsString("%d").c_str());
+        carryres=int512::shiftleft(&t128,0);
+    }
 
-	t128=test;
-	carryres=0;
-	for (int x=0;x<500;x++)
-	{
-		printf("carry shift value=%s carry=%d\n",t128.AsString("%X").c_str(),carryres);
-		carryres=int512::shiftleft(&t128,1);
-	}
+    t128=test;
+    carryres=0;
+    for (int x=0;x<500;x++)
+    {
+        printf("carry shift value=%s carry=%d\n",t128.AsString("%X").c_str(),carryres);
+        carryres=int512::shiftleft(&t128,1);
+    }
 
-	// divide test
-	test=0xFFFFFFFFFFFFFFFF;
-	t128=test;
-	t2=int512(16);
-	int512::MultiplyDouble(&t128,int512(0xFFFFF));
-	int512 remainder;
-	for (int x=0;x<10;x++)
-	{
-		printf("divide value=%s by=%s (remainder=%s)\n",t128.AsString("%X").c_str(),t2.AsString("%X").c_str(),remainder.AsString("%X").c_str());
-		remainder=int512::DivideDouble(&t128,t2);
-	}
+    // divide test
+    test=0xFFFFFFFFFFFFFFFF;
+    t128=test;
+    t2=int512(16);
+    int512::MultiplyDouble(&t128,int512(0xFFFFF));
+    int512 remainder;
+    for (int x=0;x<10;x++)
+    {
+        printf("divide value=%s by=%s (remainder=%s)\n",t128.AsString("%X").c_str(),t2.AsString("%X").c_str(),remainder.AsString("%X").c_str());
+        remainder=int512::DivideDouble(&t128,t2);
+    }
 
-	// class shift test
-	test=0x1;
-	t128=test;
-	for (int x=0;x<200;x++)
-	{
-		printf("shift value=%s\n",t128.AsString("%X").c_str());
-		t128<<=1;
-	}
-	for (int x=0;x<200;x++)
-	{
-		printf("shift value=%s\n",t128.AsString("%X").c_str());
-		t128>>=1;
-	}
+    // class shift test
+    test=0x1;
+    t128=test;
+    for (int x=0;x<200;x++)
+    {
+        printf("shift value=%s\n",t128.AsString("%X").c_str());
+        t128<<=1;
+    }
+    for (int x=0;x<200;x++)
+    {
+        printf("shift value=%s\n",t128.AsString("%X").c_str());
+        t128>>=1;
+    }
 
 
-	test=0xF;
-	t128=test;
-	test=0x10;
-	t2=test;
-	test=0;
-	over=test;
-	int64 start,end;
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		over=int512::MultiplyDouble(&t128,t2);
-	}
-	rdtscll(end);
-	printf("int512 Took %llu cycles a loop\n",(end-start)/6);
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		t128*=t2;
-	}
-	rdtscll(end);
-	printf("int512 operator *= %llu cycles a loop\n",(end-start)/6);
+    test=0xF;
+    t128=test;
+    test=0x10;
+    t2=test;
+    test=0;
+    over=test;
+    int64 start,end;
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        over=int512::MultiplyDouble(&t128,t2);
+    }
+    rdtscll(end);
+    printf("int512 Took %llu cycles a loop\n",(end-start)/6);
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        t128*=t2;
+    }
+    rdtscll(end);
+    printf("int512 operator *= %llu cycles a loop\n",(end-start)/6);
 }
 
 
 void Test16384BitTemplate(void)
 {
-	int8192  test=1024*1024*1024;
-	int16384 t128,t2, over;
+    int8192  test=1024*1024*1024;
+    int16384 t128,t2, over;
 
-	test=0xF;
-	t128=test;
-	test=0x10;
-	t2=test;
-	test=0;
-	over=test;
-	int64 start,end;
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		over=int16384::MultiplyDouble(&t128,t2);
-	}
-	rdtscll(end);
-	printf("16k MultiplyDouble Took %llu cycles a loop\n",(end-start)/6);
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		t128*=t2;
-	}
-	rdtscll(end);
-	printf("16k operator *= %llu cycles a loop\n",(end-start)/6);
+    test=0xF;
+    t128=test;
+    test=0x10;
+    t2=test;
+    test=0;
+    over=test;
+    int64 start,end;
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        over=int16384::MultiplyDouble(&t128,t2);
+    }
+    rdtscll(end);
+    printf("16k MultiplyDouble Took %llu cycles a loop\n",(end-start)/6);
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        t128*=t2;
+    }
+    rdtscll(end);
+    printf("16k operator *= %llu cycles a loop\n",(end-start)/6);
 
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		t128/=t2;
-	}
-	rdtscll(end);
-	printf("16k operator /= %llu cycles a loop\n",(end-start)/6);	
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        t128/=t2;
+    }
+    rdtscll(end);
+    printf("16k operator /= %llu cycles a loop\n",(end-start)/6);   
 }
 
 void Test131072BitTemplate(void)
 {
-	int65536  test=1024*1024*1024;
-	int131072 t128,t2, over;
+    int65536  test=1024*1024*1024;
+    int131072 t128,t2, over;
 
-	test=0xF;
-	t128=test;
-	test=0x10;
-	t2=test;
-	test=0;
-	over=test;
-	int64 start,end;
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		over=int131072::MultiplyDouble(&t128,t2);
-	}
-	rdtscll(end);
-	printf("128k MultiplyDouble Took %llu cycles a loop\n",(end-start)/6);
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		t128*=t2;
-	}
-	rdtscll(end);
-	printf("128k operator *= %llu cycles a loop\n",(end-start)/6);
-	rdtscll(start);
-	for (int x=0;x<6;x++)
-	{
-		t128/=t2;
-	}
-	rdtscll(end);
-	printf("128k operator /= %llu cycles a loop\n",(end-start)/6);
+    test=0xF;
+    t128=test;
+    test=0x10;
+    t2=test;
+    test=0;
+    over=test;
+    int64 start,end;
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        over=int131072::MultiplyDouble(&t128,t2);
+    }
+    rdtscll(end);
+    printf("128k MultiplyDouble Took %llu cycles a loop\n",(end-start)/6);
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        t128*=t2;
+    }
+    rdtscll(end);
+    printf("128k operator *= %llu cycles a loop\n",(end-start)/6);
+    rdtscll(start);
+    for (int x=0;x<6;x++)
+    {
+        t128/=t2;
+    }
+    rdtscll(end);
+    printf("128k operator /= %llu cycles a loop\n",(end-start)/6);
 }
 
 
 void Test1MBTemplate(void)
 {
-	int512kB  test=1024*1024*1024;
-	int1MB t128,t2, over;
+    int512kB  test=1024*1024*1024;
+    int1MB t128,t2, over;
 
-	printf("This is going to take a while, if it crashes verify your stack space...\n");
+    printf("This is going to take a while, if it crashes verify your stack space...\n");
 
-	test=0xF;
-	t128=test;
-	test=0x10;
-	t2=test;
-	test=0;
-	over=test;
-	int64 start,end;
-	rdtscll(start);
-	for (int x=0;x<2;x++)
-	{
-		over=int1MB::MultiplyDouble(&t128,t2);
-	}
-	rdtscll(end);
-	printf("1M MultiplyDouble Took %llu cycles a loop\n",(end-start)/2);
-	rdtscll(start);
-	for (int x=0;x<2;x++)
-	{
-		t128*=t2;
-	}
-	rdtscll(end);
-	printf("1M operator *= %llu cycles a loop\n",(end-start)/2);
-	rdtscll(start);
-	for (int x=0;x<2;x++)
-	{
-		t128/=t2;
-	}
-	rdtscll(end);
-	printf("1M operator /= %llu cycles a loop\n",(end-start)/2);
+    test=0xF;
+    t128=test;
+    test=0x10;
+    t2=test;
+    test=0;
+    over=test;
+    int64 start,end;
+    rdtscll(start);
+    for (int x=0;x<2;x++)
+    {
+        over=int1MB::MultiplyDouble(&t128,t2);
+    }
+    rdtscll(end);
+    printf("1M MultiplyDouble Took %llu cycles a loop\n",(end-start)/2);
+    rdtscll(start);
+    for (int x=0;x<2;x++)
+    {
+        t128*=t2;
+    }
+    rdtscll(end);
+    printf("1M operator *= %llu cycles a loop\n",(end-start)/2);
+    rdtscll(start);
+    for (int x=0;x<2;x++)
+    {
+        t128/=t2;
+    }
+    rdtscll(end);
+    printf("1M operator /= %llu cycles a loop\n",(end-start)/2);
 }
 
 void TestSignedValue(void)
 {
-	sint256 x,y,z;
-	int64 testvals[][2]=
-	{
-		{11, -10},
-		{10, -10},
-		{9 , -10},
-		{1 , -10},
-		{0,  -10},
-		{-1 , -10},
-		{-9, -10},
-		{-10, -10},
-		{-11, -10},
-		{9999,9999}
-	};
-	char *teststrs[]=
-	{
-		"0x10",
-		"10",
-		"-10",
-		"0x0010000000000000000000000",
-		"309485009821345068724781056",
-		NULL
-	};
-	int cnt=0;
-	while (testvals[cnt][0]!=9999)
-	{
-		printf("signed int x=%d y=%d\n",testvals[cnt][0],testvals[cnt][1]);
-		x=sint256(testvals[cnt][0]);
-		y=sint256(testvals[cnt][1]);
+    sint256 x,y,z;
+    int64 testvals[][2]=
+    {
+        {11, -10},
+        {10, -10},
+        {9 , -10},
+        {1 , -10},
+        {0,  -10},
+        {-1 , -10},
+        {-9, -10},
+        {-10, -10},
+        {-11, -10},
+        {9999,9999}
+    };
+    char *teststrs[]=
+    {
+        "0x10",
+        "10",
+        "-10",
+        "0x0010000000000000000000000",
+        "309485009821345068724781056",
+        NULL
+    };
+    int cnt=0;
+    while (testvals[cnt][0]!=9999)
+    {
+        printf("signed int x=%d y=%d\n",testvals[cnt][0],testvals[cnt][1]);
+        x=sint256(testvals[cnt][0]);
+        y=sint256(testvals[cnt][1]);
 
-		printf("%s>=%s is %s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),x>=y?"true":"false");
-		printf("%s<=%s is %s\n",y.AsString("%d").c_str(),x.AsString("%d").c_str(),y<=x?"true":"false");
-		printf("%s<=%s is %s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),x<=y?"true":"false");
-		printf("%s>=%s is %s\n",y.AsString("%d").c_str(),x.AsString("%d").c_str(),y>=x?"true":"false");
+        printf("%s>=%s is %s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),x>=y?"true":"false");
+        printf("%s<=%s is %s\n",y.AsString("%d").c_str(),x.AsString("%d").c_str(),y<=x?"true":"false");
+        printf("%s<=%s is %s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),x<=y?"true":"false");
+        printf("%s>=%s is %s\n",y.AsString("%d").c_str(),x.AsString("%d").c_str(),y>=x?"true":"false");
 
 
-		printf("%s>%s is %s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),x>y?"true":"false");
-		printf("%s<%s is %s\n",y.AsString("%d").c_str(),x.AsString("%d").c_str(),y<x?"true":"false");
-		printf("%s<%s is %s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),x<y?"true":"false");
- 		printf("%s>%s is %s\n",y.AsString("%d").c_str(),x.AsString("%d").c_str(),y>x?"true":"false");
-		z=x+y;
- 		printf("%s+%s=%s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),z.AsString("%d").c_str());
-		z=x-y;
- 		printf("%s-%s=%s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),z.AsString("%d").c_str());
-		z=x*y;
- 		printf("%s*%s=%s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),z.AsString("%d").c_str());
-		z=x/y;
- 		printf("%s/%s=%s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),z.AsString("%d").c_str());
-		cnt++;
-	}
+        printf("%s>%s is %s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),x>y?"true":"false");
+        printf("%s<%s is %s\n",y.AsString("%d").c_str(),x.AsString("%d").c_str(),y<x?"true":"false");
+        printf("%s<%s is %s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),x<y?"true":"false");
+        printf("%s>%s is %s\n",y.AsString("%d").c_str(),x.AsString("%d").c_str(),y>x?"true":"false");
+        z=x+y;
+        printf("%s+%s=%s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),z.AsString("%d").c_str());
+        z=x-y;
+        printf("%s-%s=%s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),z.AsString("%d").c_str());
+        z=x*y;
+        printf("%s*%s=%s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),z.AsString("%d").c_str());
+        z=x/y;
+        printf("%s/%s=%s\n",x.AsString("%d").c_str(),y.AsString("%d").c_str(),z.AsString("%d").c_str());
+        cnt++;
+    }
 
-	cnt=0;
-	while (teststrs[cnt]!=NULL)
-	{
-		x.FromString(teststrs[cnt]);
-		printf("%s should be equal to\n%s\n",teststrs[cnt],x.AsString("%d").c_str());
-		cnt++;
-	}
+    cnt=0;
+    while (teststrs[cnt]!=NULL)
+    {
+        x.FromString(teststrs[cnt]);
+        printf("%s should be equal to\n%s\n",teststrs[cnt],x.AsString("%d").c_str());
+        cnt++;
+    }
 }
 
 
@@ -1639,32 +1639,32 @@ void TestSignedValue(void)
 #include <sys/resource.h>
 int main(int argc,char *argv[])
 {
-	// for the 1MB objects the stack size needs to be adjusted..
-	rlimit newlimit;
-	if (getrlimit(RLIMIT_STACK,&newlimit)!=0)
-	{
-		perror("Unable to get stack limit");
-	}
-	else
-	{
-		printf("current stack size %d, max limit %d\n",newlimit.rlim_cur,newlimit.rlim_max);
-	}
-	//newlimit.rlim_max=1024L*1024L*64L; //64M stack...
-	newlimit.rlim_cur=1024L*1024L*64L; //64M stack...
-	if (setrlimit(RLIMIT_STACK, &newlimit)!=0)
-	{
-		perror("Unable to set stack limit, check ulimit -s unlimited, or comment out the exit(1) and the Test1MBTemplate");
-		return 1;
-	}
+    // for the 1MB objects the stack size needs to be adjusted..
+    rlimit newlimit;
+    if (getrlimit(RLIMIT_STACK,&newlimit)!=0)
+    {
+        perror("Unable to get stack limit");
+    }
+    else
+    {
+        printf("current stack size %d, max limit %d\n",newlimit.rlim_cur,newlimit.rlim_max);
+    }
+    //newlimit.rlim_max=1024L*1024L*64L; //64M stack...
+    newlimit.rlim_cur=1024L*1024L*64L; //64M stack...
+    if (setrlimit(RLIMIT_STACK, &newlimit)!=0)
+    {
+        perror("Unable to set stack limit, check ulimit -s unlimited, or comment out the exit(1) and the Test1MBTemplate");
+        return 1;
+    }
 
-	Test64BitBase();
-	Test128BitTemplate();
-	Test256BitTemplate();
-	Test512BitTemplate();
-	TestSignedValue();
-	Test16384BitTemplate();
-	Test131072BitTemplate();
-	Test1MBTemplate();
+    Test64BitBase();
+    Test128BitTemplate();
+    Test256BitTemplate();
+    Test512BitTemplate();
+    TestSignedValue();
+    Test16384BitTemplate();
+    Test131072BitTemplate();
+    Test1MBTemplate();
 }
 
 #endif //_UNITTEST_
