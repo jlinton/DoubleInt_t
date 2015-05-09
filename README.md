@@ -42,10 +42,11 @@ combined with some inline assembly to create a integer class
 that could export information about whether an operation had overflow/carry
 
 The doubler type mostly behaves as would be expected for a normal integer
-type, although it only supports the unary operators. The global binary 
-operators (aka x=y+z) could be easily added but you then need a set 
-for each type along with appropriate conversions. So the example
-must be coded as x=y; x+=z;
+type, although it only supports the unary operators and duplicate types for
+binary operators. The global binary operators (aka x=y+z where y isn't a 
+double_t) could be easily added but you then need a set for each type along 
+with appropriate conversions. So the example
+must be coded as x=intxxxx(y)+z; or x=y; x+=z;
 
 See my vector class for some examples of global binary operators if you
 don't know how to implement them yourself.
