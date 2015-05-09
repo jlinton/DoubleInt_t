@@ -59,8 +59,6 @@ typedef class int128_t
         int128_t(const int64    &orig):Hi(0),Lo(orig) {}
         // assignment
         int128_t &operator= (const int128_t &rhs) {Hi=rhs.Hi;Lo=rhs.Lo;return *this;}
-//      int128_t &operator= (const int64    &rhs) {Hi=0;Lo=rhs;return *this;}
-//      int128_t &operator= (const int32    &rhs) {Hi=0;Lo=rhs;return *this;}
         // compariston
         bool     operator==(const int128_t &rhs) { if ((Hi==rhs.Hi) && (Lo==rhs.Lo)) return true; return false;}
         bool     operator!=(const int128_t &rhs) { if ((Hi==rhs.Hi) && (Lo==rhs.Lo)) return false; return true;}
@@ -97,14 +95,6 @@ typedef class int128_t
 
         int128_t operator>>(  const int      &rhs) { int128_t tmp=*this; tmp>>=rhs; return tmp;}
         int128_t operator<<(  const int      &rhs) { int128_t tmp=*this; tmp<<=rhs; return tmp;}
-
-        // the following pretty much the same as above, in both cases we are in temp hell
-/*
-        friend int128_t operator+(const int128_t &lhs,const int128_t &rhs) { int128_t tmp=lhs; Add128(&tmp,&rhs,0); return tmp;}
-        friend int128_t operator-(const int128_t &lhs,const int128_t &rhs) { int128_t tmp=lhs; Sub128(&tmp,&rhs,0); return tmp;}
-        friend int128_t operator/(const int128_t &lhs,const int128_t &rhs) { int128_t tmp=lhs; Divide128(&tmp,&rhs); return tmp;}
-        friend int128_t operator*(const int128_t &lhs,const int128_t &rhs) { int128_t tmp=lhs; Multiply128(&tmp,&rhs); return tmp;}
-*/
 
         // input/output routines
         string AsString(const char *format);
@@ -172,27 +162,6 @@ static inline int64 Divide64(int64 *A, int64 *B,int64 *C)
      );
     return ret;
 }
-
-/*
-//returns carry and sum in A
-static inline int Add64(int64 *A,const int64 *B,const int carry)
-{
-    int ret_carry=0;
-
-    asm ("clc           \n\t"
-         "cmp  $0,%3    \n\t"
-         "je  0f        \n\t"
-         "stc           \n\t"
-         "0: adc %4, %0 \n\t"
-         "jnc 0f        \n\t"
-         "mov $1, %1    \n\t"
-         "0:"
-         :"=r" (*A), "=r" (ret_carry)
-         :"0" (*A), "r" (carry), "r" (*B), "1" (ret_carry)
-         : "cc"
-    );
-    return ret_carry;
-}*/
 
 
 //returns carry and sum in A

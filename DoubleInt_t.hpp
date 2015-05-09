@@ -84,8 +84,6 @@ template<class BaseIntT> class DoubleInt_t
         DoubleInt_t(const int64       &orig):Hi(0),Lo(orig),size(Hi.size*2) {}
         // assignment
         DoubleInt_t &operator= (const DoubleInt_t &rhs) {Hi=rhs.Hi;Lo=rhs.Lo;return *this;}
-//      DoubleInt_t &operator= (const int64    &rhs) {Hi=0;Lo=rhs;return *this;}
-//      DoubleInt_t &operator= (const int32    &rhs) {Hi=0;Lo=rhs;return *this;}
         // compariston
         bool     operator==(const DoubleInt_t &rhs) { if ((Hi==rhs.Hi) && (Lo==rhs.Lo)) return true; return false;}
         bool     operator!=(const DoubleInt_t &rhs) { if ((Hi==rhs.Hi) && (Lo==rhs.Lo)) return false; return true;}
@@ -124,13 +122,6 @@ template<class BaseIntT> class DoubleInt_t
         DoubleInt_t operator>>(  const int      &rhs) { DoubleInt_t tmp=*this; tmp>>=rhs; return tmp;}
         DoubleInt_t operator<<(  const int      &rhs) { DoubleInt_t tmp=*this; tmp<<=rhs; return tmp;}
 
-        // the following pretty much the same as above, in both cases we are in temp hell
-/*
-        friend DoubleInt_t operator+(const DoubleInt_t &lhs,const DoubleInt_t &rhs) { DoubleInt_t tmp=lhs; Add128(&tmp,&rhs,0); return tmp;}
-        friend DoubleInt_t operator-(const DoubleInt_t &lhs,const DoubleInt_t &rhs) { DoubleInt_t tmp=lhs; Sub128(&tmp,&rhs,0); return tmp;}
-        friend DoubleInt_t operator/(const DoubleInt_t &lhs,const DoubleInt_t &rhs) { DoubleInt_t tmp=lhs; Divide128(&tmp,&rhs); return tmp;}
-        friend DoubleInt_t operator*(const DoubleInt_t &lhs,const DoubleInt_t &rhs) { DoubleInt_t tmp=lhs; Multiply128(&tmp,&rhs); return tmp;}
-*/
 
 
         // consider overridding printf until then use AsString
