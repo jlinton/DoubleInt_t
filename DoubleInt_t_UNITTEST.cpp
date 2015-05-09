@@ -1,5 +1,8 @@
-//#!/bin/bash
-//usr/bin/tail -n +2 $0 | g++ -O3 -o ${0%.cpp} -x c++ - && ./${0%.cpp} && rm ./${0%.cpp} && exit
+#!/bin/bash
+//usr/bin/tail -n +2 $0 | g++ -O3 -o ${0%.cpp} -x c++ - && ./${0%.cpp} && rm ./${0%.cpp} ; exit
+//
+// This unit test can be directly executed, just `chmod u+x Double_t_UNITTEST.cpp` it
+//
 // C++ BigNum template class
 // AKA the integer doubler template.
 // Copyright(C) 2007,2015 Jeremy Linton
@@ -126,16 +129,18 @@ void Test64BitBase(void)
 
 
     // 64 bit divide
-/*  a=0x10000;
-    b=0x10;
+	// Pick these constants carefully
+	// if the result cannot fit into a 64-bit 
+	// register then this will sigfpe (or throw)
+	a=0x10000;
+    b=0x1; //b=0x10 will sigfpe
     c=0x03;
     overflow=0;
     for (int x=0;x<20;x++)
     {
         printf("remainder=%llX, a=%llX b=%llX c=%llX\n",overflow,a,b,c);
         overflow=Divide64(&a,&b,&c);
-    }*/
-
+    }
 }
 
 void Test128BitTemplate(void)

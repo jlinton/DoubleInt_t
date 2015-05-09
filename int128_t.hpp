@@ -144,6 +144,8 @@ static inline int64 Multiply64(int64 *A, int64 *B)
 }
 
 // take a long word B:A and divide by C, result in A and remainder is returned
+// This is provided for completeness but isn't used because the 
+// divide double is implemented as shifts/subtracts like the doubler is
 static inline int64 Divide64(int64 *A, int64 *B,int64 *C)
 {
     int64 ret; 
@@ -151,8 +153,8 @@ static inline int64 Divide64(int64 *A, int64 *B,int64 *C)
     {
         throw "Divide by zero";
     }
-    if (*C>*B)
-    {
+    if (*B>*C) //if the part in the high 64-bits is larger than the divisor then the 
+    {          //cannot fit in RAX.
         throw "Underflow";
     }
     asm ("div %4    \n\t"
