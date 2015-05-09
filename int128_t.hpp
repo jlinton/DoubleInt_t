@@ -73,7 +73,7 @@ typedef class int128_t
         int128_t &operator+=( const int128_t &rhs) { AddDouble(this,rhs,0); return *this;}
         int128_t &operator*=( const int128_t &rhs) { MultiplyDouble(this,rhs); return *this;}
         int128_t &operator/=( const int128_t &rhs) { DivideDouble(this,rhs); return *this;}
-        int128_t &operator%=( const int128_t &rhs) { this=DivideDouble(this,rhs); return *this;}
+        int128_t &operator%=( const int128_t &rhs) { *this=DivideDouble(this,rhs); return *this;}
 
         int128_t &operator&=( const int64 &rhs) { this->Lo&=rhs; return *this;}
         int128_t &operator|=( const int64 &rhs) { this->Lo|=rhs; return *this;}
@@ -88,7 +88,7 @@ typedef class int128_t
         int128_t operator+(   const int128_t &rhs) { int128_t tmp=*this; AddDouble(&tmp,rhs,0); return tmp;}
         int128_t operator-(   const int128_t &rhs) { int128_t tmp=*this; SubDouble(&tmp,rhs,0); return tmp;}
         int128_t operator/(   const int128_t &rhs) { int128_t tmp=*this; DivideDouble(&tmp,rhs); return tmp;}
-        int128_t operator%(   const int128_t &rhs) { int128_t tmp=*this; this=DivideDouble(&tmp,rhs); return tmp;}
+        int128_t operator%(   const int128_t &rhs) { int128_t tmp=*this; tmp=DivideDouble(&tmp,rhs); return tmp;}
         int128_t operator*(   const int128_t &rhs) { int128_t tmp=*this; MultiplyDouble(&tmp,rhs); return tmp;}
 
         int128_t operator&(   const int64    &rhs) { int128_t tmp=*this; tmp&=rhs; return tmp;}

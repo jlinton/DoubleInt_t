@@ -98,7 +98,7 @@ template<class BaseIntT> class DoubleInt_t
         DoubleInt_t &operator+=( const DoubleInt_t &rhs) { AddDouble(this,rhs,0); return *this;}
         DoubleInt_t &operator*=( const DoubleInt_t &rhs) { MultiplyDouble(this,rhs); return *this;}
         DoubleInt_t &operator/=( const DoubleInt_t &rhs) { DivideDouble(this,rhs); return *this;}
-        DoubleInt_t &operator%=( const DoubleInt_t &rhs) { this=DivideDouble(this,rhs); return *this;}
+        DoubleInt_t &operator%=( const DoubleInt_t &rhs) { *this=DivideDouble(this,rhs); return *this;}
 
 
 
