@@ -98,6 +98,8 @@ template<class BaseIntT> class DoubleInt_t
         DoubleInt_t &operator+=( const DoubleInt_t &rhs) { AddDouble(this,rhs,0); return *this;}
         DoubleInt_t &operator*=( const DoubleInt_t &rhs) { MultiplyDouble(this,rhs); return *this;}
         DoubleInt_t &operator/=( const DoubleInt_t &rhs) { DivideDouble(this,rhs); return *this;}
+        DoubleInt_t &operator%=( const DoubleInt_t &rhs) { this=DivideDouble(this,rhs); return *this;}
+
 
 
         DoubleInt_t &operator&=( const int64 &rhs) { this->Lo&=rhs; return *this;}
@@ -112,6 +114,7 @@ template<class BaseIntT> class DoubleInt_t
         DoubleInt_t operator+(   const DoubleInt_t &rhs) { DoubleInt_t tmp=*this; AddDouble(&tmp,rhs,0); return tmp;}
         DoubleInt_t operator-(   const DoubleInt_t &rhs) { DoubleInt_t tmp=*this; SubDouble(&tmp,rhs,0); return tmp;}
         DoubleInt_t operator/(   const DoubleInt_t &rhs) { DoubleInt_t tmp=*this; DivideDouble(&tmp,rhs); return tmp;}
+        DoubleInt_t operator%(   const DoubleInt_t &rhs) { DoubleInt_t tmp=*this; tmp=DivideDouble(&tmp,rhs); return tmp;}
         DoubleInt_t operator*(   const DoubleInt_t &rhs) { DoubleInt_t tmp=*this; MultiplyDouble(&tmp,rhs); return tmp;}
 
         DoubleInt_t operator&(   const int64    &rhs) { DoubleInt_t tmp=*this; tmp.Lo&=rhs; return tmp;}
